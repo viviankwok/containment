@@ -2,14 +2,10 @@ require("dotenv").config();
 
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require("uuid");
+const db = require("../db/queries");
+// const { check, validationResult } = require("express-validator");
 
-// const User = require("../models/User");
-const auth = require("../middleware/auth");
-const { check, validationResult } = require("express-validator");
-
+// TESTING
 router.get("/testing", async (req, res) => {
   try {
     res.send("testing route for containers.");
@@ -18,5 +14,8 @@ router.get("/testing", async (req, res) => {
     res.json("An error has occurred.");
   }
 });
+
+// ROUTES (with root '/containers')
+router.get("/all", db.getContainers);
 
 module.exports = router;
