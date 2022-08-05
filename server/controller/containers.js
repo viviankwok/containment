@@ -17,5 +17,8 @@ router.get("/testing", async (req, res) => {
 
 // ROUTES (with root '/containers')
 router.get("/all", db.getContainers);
+router.post("/create", db.createContainer);
+router.patch("/update/:model_num", db.updateContainer);
+router.delete("/delete/:model_num", db.deleteContainer);
 
 module.exports = router;
