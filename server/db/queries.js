@@ -8,12 +8,13 @@ const pool = new Pool({
   port: 5432,
 });
 
-/////////////////////////////////////////// CONTAINERS
+/////////////////////////////////////////// CONTAINER CRUD
 
-// GET ALL CONTAINERS
+// GET ALL CONTAINERS;
 const getContainers = async (req, res) => {
+  console.log('GET "/containers/all" activated');
   pool.query(
-    "SELECT * FROM containers ORDER BY model_num ASC",
+    "SELECT * FROM containers ORDER BY product_code ASC",
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
@@ -26,11 +27,13 @@ const getContainers = async (req, res) => {
 
 // CREATE CONTAINER
 const createContainer = async (req, res) => {
-  const { model_num, brand, length, width, height } = req.body;
+  console.log('POST "/containers/create" activated');
+
+  const { product_code, brand, length, width, height } = req.body;
 
   pool.query(
-    "INSERT INTO containers (model_num, brand, length, width, height) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-    [model_num, brand, length, width, height],
+    "INSERT INTO containers (product_code, brand, length, width, height) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    [product_code, brand, length, width, height],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
@@ -40,7 +43,7 @@ const createContainer = async (req, res) => {
       res
         .status(201)
         .send(
-          `Container added with model number: ${results.rows[0].model_num}`
+          `Container added with model number: ${results.rows[0].product_code}`
         );
     }
   );
@@ -48,36 +51,44 @@ const createContainer = async (req, res) => {
 
 // UPDATE CONTAINER
 const updateContainer = async (req, res) => {
-  const model_num = req.params.model_num;
-  // model_num cannot be redefined/updated
+  const product_code = req.params.product_code;
+
+  console.log(`PATCH "/containers/update/${product_code}" activated`);
+
+  // product_code cannot be redefined/updated
   const { brand, length, width, height } = req.body;
 
   pool.query(
-    "UPDATE containers SET brand = $2, length = $3, width = $4, height = $5 WHERE model_num = $1",
-    [model_num, brand, length, width, height],
+    "UPDATE containers SET brand = $2, length = $3, width = $4, height = $5 WHERE product_code = $1",
+    [product_code, brand, length, width, height],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
         console.log(error);
       }
-      res.status(200).send(`Container modified with model_num: ${model_num}`);
+      res
+        .status(200)
+        .send(`Container modified with product_code: ${product_code}`);
     }
   );
 };
 
 // DELETE CONTAINER
 const deleteContainer = async (req, res) => {
-  const model_num = req.params.model_num;
+  const product_code = req.params.product_code;
+  console.log(`DELETE "/containers/delete/${product_code}" activated`);
 
   pool.query(
-    "DELETE FROM containers WHERE model_num = $1",
-    [model_num],
+    "DELETE FROM containers WHERE product_code = $1",
+    [product_code],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
         console.log(error);
       }
-      res.status(200).send(`Container deleted with model_num: ${model_num}`);
+      res
+        .status(200)
+        .json(`Container deleted with product_code: ${product_code}`);
     }
   );
 };
