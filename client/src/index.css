@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 body {
-  background-color: paleturquoise;
+  /* background-color: paleturquoise; */
+  font-family: "Playfair Display", serif;
 }
 
 #app {
-  background-color: palevioletred;
+  background-color: #efebe9;
 }
 
-#nav-bar {
-  background-color: palegreen;
+#app-bar {
+  background-color: #bdb9b7;
 }
 
-#main {
-  background-color: palegoldenrod;
+.logo {
+  font-family: "Abril Fatface", cursive;
 }
