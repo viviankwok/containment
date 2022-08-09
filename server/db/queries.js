@@ -136,6 +136,28 @@ const deleteSpace = async (req, res) => {
   );
 };
 
+/////////////////////////////////////////// CALCULATION ALGO
+const calcContainers = async (req, res) => {
+  console.log(`POST "/calculate activated"`);
+
+  const spaceHeight = req.body.height;
+  const spaceDepth = req.body.depth;
+
+  poolSpaces.query(
+    `SELECT product_code,length FROM containers WHERE height<${spaceHeight} AND depth<${spaceDepth} ORDER BY brand asc`,
+    (error, results) => {
+      if (error) {
+        res.json("Something went wrong.");
+        console.log(error);
+      } else if (results.rows.length == 0) {
+        res.json("No products matched the search.");
+      } else {
+        res.status(200).json(results.rows);
+      }
+    }
+  );
+};
+
 module.exports = {
   getContainers,
   createContainer,
@@ -143,4 +165,5 @@ module.exports = {
   deleteContainer,
   getSpaces,
   deleteSpace,
+  calcContainers,
 };

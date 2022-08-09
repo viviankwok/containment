@@ -30,6 +30,10 @@ app.use("/containers", containersController);
 const spacesController = require("./controller/spaces");
 app.use("/spaces", spacesController);
 
+// endpoint
+const db = require("./db/queries");
+app.post("/calculate", db.calcContainers);
+
 // listen to PORT
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`server started at port: ${PORT}`));
