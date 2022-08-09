@@ -1,6 +1,17 @@
-/////////////////////////////////////////// DB CONNECTION
+/////////////////////////////////////////// DB CONNECTIONS
 const Pool = require("pg").Pool;
+
+// connection for table: containers
 const pool = new Pool({
+  user: "containment_user",
+  host: "localhost",
+  database: "containment",
+  password: "example",
+  port: 5432,
+});
+
+// connection for table: spaces
+const poolSpaces = new Pool({
   user: "containment_user",
   host: "localhost",
   database: "containment",
@@ -93,9 +104,43 @@ const deleteContainer = async (req, res) => {
   );
 };
 
+/////////////////////////////////////////// SPACES CRUD
+
+// GET ALL SPACES;
+const getSpaces = async (req, res) => {
+  console.log('GET "/spaces/all" activated');
+  poolSpaces.query("SELECT * FROM spaces ORDER BY id ASC", (error, results) => {
+    if (error) {
+      res.json("Something went wrong.");
+      console.log(error);
+    }
+    res.status(200).json(results.rows);
+  });
+};
+
+// DELETE SPACE
+const deleteSpace = async (req, res) => {
+  const id = req.params.id;
+  console.log(`DELETE "/spaces/delete/${id}" activated`);
+
+  poolSpaces.query(
+    "DELETE FROM spaces WHERE id = $1",
+    [id],
+    (error, results) => {
+      if (error) {
+        res.json("Something went wrong.");
+        console.log(error);
+      }
+      res.status(200).json(`Container deleted with id: ${id}`);
+    }
+  );
+};
+
 module.exports = {
   getContainers,
   createContainer,
   updateContainer,
   deleteContainer,
+  getSpaces,
+  deleteSpace,
 };

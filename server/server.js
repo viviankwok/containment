@@ -20,12 +20,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// controller
+// controllers
 const usersController = require("./controller/users");
 app.use("/users", usersController);
 
 const containersController = require("./controller/containers.js");
 app.use("/containers", containersController);
+
+const spacesController = require("./controller/spaces");
+app.use("/spaces", spacesController);
 
 // listen to PORT
 const PORT = process.env.PORT || 5001;
