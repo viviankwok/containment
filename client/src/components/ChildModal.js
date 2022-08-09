@@ -52,13 +52,14 @@ export default function ChildModal(props) {
           >
             [Warning]
           </Typography>
-          <div id="child-modal-description" className="flex justify center">
+          <div id="child-modal-description" className="flex justify-center">
             This will delete
             <span className="font-bold uppercase">
               &nbsp;{reactCtx.modalProduct.name}&nbsp;
             </span>
-            permanently. Are you sure?
+            permanently.
           </div>
+          <div className="flex justify-center">Are you sure?</div>
           <br />
           <div className="flex justify-center">
             <Button variant="contained" onClick={handleClose}>

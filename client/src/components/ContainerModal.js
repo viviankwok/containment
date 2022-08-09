@@ -93,8 +93,8 @@ export default function ContainerModal(props) {
                 {reactCtx.modalProduct.brand}
                 <br />
                 <Typography variant="overline">[size]</Typography>&nbsp;
-                {reactCtx.modalProduct.length} (L) x
-                {reactCtx.modalProduct.depth} (D) x
+                {reactCtx.modalProduct.length} (L) ×&nbsp;
+                {reactCtx.modalProduct.depth} (D) ×&nbsp;
                 {reactCtx.modalProduct.height} (H) cm
                 <br />
                 <Typography variant="overline">[price]</Typography> $x
