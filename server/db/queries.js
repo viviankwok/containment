@@ -144,7 +144,7 @@ const calcContainers = async (req, res) => {
   const spaceDepth = req.body.depth;
 
   poolSpaces.query(
-    `SELECT product_code,length FROM containers WHERE height<${spaceHeight} AND depth<${spaceDepth} ORDER BY brand asc`,
+    `SELECT * FROM containers WHERE height<${spaceHeight} AND depth<${spaceDepth} ORDER BY brand asc`,
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
