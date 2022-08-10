@@ -63,7 +63,7 @@ const Containers = () => {
       >
         <div className="mb-1 grid justify-center">
           <div className="text-2xl font-bold">All containers.</div>
-          <div className="text-xs font-light">[EVERYTHING OUT THERE]</div>
+          <div className="text-xs font-light">[ EVERYTHING OUT THERE ]</div>
         </div>
         <ContainerModal
           open={open}

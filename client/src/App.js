@@ -37,7 +37,7 @@ const App = () => {
     <div id="app" className="h-screen">
       <ThemeProvider theme={theme}>
         <TopAppBar handleNav={handleNav} />
-        <div id="content" className="h-4/5 p-6">
+        <div id="content" className="p-6 px-12 pb-24 h-full">
           {view === "home" ? <Main /> : ""}
           {view === "calculate" ? <Calculate /> : ""}
           {view === "containers" ? <Containers /> : ""}

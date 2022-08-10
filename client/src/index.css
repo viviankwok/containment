@@ -9,6 +9,7 @@ body {
 
 #app {
   background-color: #efebe9;
+  height: 100%;
 }
 
 #app-bar {
@@ -17,4 +18,8 @@ body {
 
 .logo {
   font-family: "Abril Fatface", cursive;
+}
+
+#main {
+  height: 500px;
 }

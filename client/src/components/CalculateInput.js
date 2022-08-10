@@ -7,6 +7,7 @@ import {
   Typography,
   ImageList,
   ImageListItem,
+  InputAdornment,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import ResultModal from "./ResultModal";
@@ -105,27 +106,45 @@ export default function CalculateInput() {
                 id="outlined-size-small"
                 // defaultValue="Small"
                 size="small"
-                sx={{ width: 80 }}
+                sx={{ width: 100 }}
                 value={length}
                 onChange={handleLengthInput}
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">cm</InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 label="depth"
                 id="outlined-size-small"
                 // defaultValue="Small"
                 size="small"
-                sx={{ width: 80 }}
+                sx={{ width: 100 }}
                 value={depth}
                 onChange={handleDepthInput}
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">cm</InputAdornment>
+                  ),
+                }}
               />
               <TextField
                 label="height"
                 id="outlined-size-small"
                 // defaultValue="Small"
                 size="small"
-                sx={{ width: 80 }}
+                sx={{ width: 100 }}
                 value={height}
                 onChange={handleHeightInput}
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">cm</InputAdornment>
+                  ),
+                }}
               />
               <Button
                 variant="contained"

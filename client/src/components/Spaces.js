@@ -63,7 +63,7 @@ const Spaces = () => {
       >
         <div className="mb-1 grid justify-center">
           <div className="text-2xl font-bold">All spaces.</div>
-          <div className="text-xs font-light">[EVERYTHING IN HERE]</div>
+          <div className="text-xs font-light">[ EVERYTHING IN HERE ]</div>
         </div>
         <SpaceModal
           open={open}

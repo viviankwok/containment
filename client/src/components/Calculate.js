@@ -9,7 +9,7 @@ const Calculate = () => {
           Enter storage space details.
         </div>
         <div className="text-xs font-light flex justify-center">
-          [ & FIND A SUITABLE CONTAINER. ]
+          [ & FIND A SUITABLE CONTAINER ]
         </div>
       </div>
       <CalculateInput />
