@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from "react";
-import ContainerModal from "./ContainerModal";
-import ContainerModalView from "./ContainerModalView";
 import ContainerModalRev from "./ContainerModalRev";
-import {
-  ImageList,
-  ImageListItem,
-  Typography,
-  ImageListItemBar,
-} from "@mui/material";
+import { ImageList, ImageListItem, Typography } from "@mui/material";
 import ReactContext from "./context/react.context";
+import FabCreate from "./FabCreate";
 
 const Containers = () => {
   const [containers, setContainers] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
 
   // container info modal
   const handleOpen = (d) => {
@@ -72,8 +67,13 @@ const Containers = () => {
           setModalProduct,
           isEditing,
           setIsEditing,
+          containers,
+          setContainers,
+          isCreating,
+          setIsCreating,
         }}
       >
+        {/* isEditing state: {JSON.stringify(isEditing)} */}
         <div className="mb-1 grid justify-center">
           <div className="text-2xl font-bold">All containers.</div>
           <div className="text-xs font-light">[ EVERYTHING OUT THERE ]</div>
@@ -85,7 +85,6 @@ const Containers = () => {
           modalProduct={modalProduct}
         />
         <br />
-
         <ImageList sx={{ width: 1, height: 700 }} cols={5} gap={25}>
           {containers.map((d, i) => (
             <ImageListItem key={d.product_code}>
@@ -106,11 +105,14 @@ const Containers = () => {
               >
                 {d.name}
                 <br />
-                <span className="font-normal">by {d.brand}</span>
+                <span className="font-normal">
+                  by <span className="uppercase">{d.brand}</span>
+                </span>
               </Typography>
             </ImageListItem>
           ))}
         </ImageList>
+        <FabCreate />
       </ReactContext.Provider>
     </div>
   );

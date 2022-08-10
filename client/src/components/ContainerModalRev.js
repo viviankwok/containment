@@ -10,6 +10,7 @@ import ReactContext from "./context/react.context";
 
 import ContainerModalView from "./ContainerModalView";
 import ContainerModalEdit from "./ContainerModalEdit";
+import ContainerModalCreate from "./ContainerModalCreate";
 
 const style = {
   position: "absolute",
@@ -43,6 +44,8 @@ export default function ContainerModal(props) {
           <Box sx={style}>
             {reactCtx.isEditing ? (
               <ContainerModalEdit />
+            ) : reactCtx.isCreating ? (
+              <ContainerModalCreate />
             ) : (
               <ContainerModalView />
             )}
