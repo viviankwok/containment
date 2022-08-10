@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContainerModal from "./ContainerModal";
+import ContainerModalView from "./ContainerModalView";
+import ContainerModalRev from "./ContainerModalRev";
 import {
   ImageList,
   ImageListItem,
@@ -12,13 +14,17 @@ const Containers = () => {
   const [containers, setContainers] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
 
   // container info modal
   const handleOpen = (d) => {
     setOpen(true);
     setModalProduct(d);
   };
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setIsEditing(false);
+  };
 
   // fetch all containers from db
   const getData = async () => {
@@ -59,13 +65,21 @@ const Containers = () => {
   return (
     <div id="containers" className=" justify-center">
       <ReactContext.Provider
-        value={{ open, setOpen, modalProduct, setModalProduct }}
+        value={{
+          open,
+          setOpen,
+          modalProduct,
+          setModalProduct,
+          isEditing,
+          setIsEditing,
+        }}
       >
         <div className="mb-1 grid justify-center">
           <div className="text-2xl font-bold">All containers.</div>
           <div className="text-xs font-light">[ EVERYTHING OUT THERE ]</div>
+          isEditing state: {JSON.stringify(isEditing)}
         </div>
-        <ContainerModal
+        <ContainerModalRev
           open={open}
           handleOpen={handleOpen}
           handleClose={handleClose}

@@ -26,10 +26,9 @@ export default function ChildModal(props) {
     props.setOpenChild(false);
   };
 
-  const confirmDelete = (productCode) => {
-    props.delData(productCode);
-    props.setOpenChild(false);
-    reactCtx.setOpen(false);
+  const discardChanges = () => {
+    console.log("discard change btn clicked");
+    reactCtx.setIsEditing(false);
   };
 
   return (
@@ -53,11 +52,7 @@ export default function ChildModal(props) {
             [Warning]
           </Typography>
           <div id="child-modal-description" className="flex justify-center">
-            This will delete
-            <span className="font-bold uppercase">
-              &nbsp;{reactCtx.modalProduct.name}&nbsp;
-            </span>
-            permanently.
+            All changes made will be lost.
           </div>
           <div className="flex justify-center">Are you sure?</div>
           <br />
@@ -68,12 +63,10 @@ export default function ChildModal(props) {
             &nbsp;&nbsp;&nbsp;
             <Button
               variant="contained"
-              onClick={() => {
-                confirmDelete(reactCtx.modalProduct.product_code);
-              }}
+              onClick={discardChanges}
               color="warning"
             >
-              Delete permanently
+              Discard Changes
             </Button>
           </div>
         </Box>
