@@ -67,6 +67,7 @@ const updateContainer = async (req, res) => {
   // product_code cannot be redefined/updated
   // product_code not required in body; passed through params
   const { product_code, brand, name, length, depth, height } = req.body;
+  console.log("req.body here:", req.body);
 
   pool.query(
     "UPDATE containers SET name = $2, brand = $3, length = $4, depth = $5, height = $6 WHERE product_code = $1",
@@ -78,7 +79,7 @@ const updateContainer = async (req, res) => {
       }
       res
         .status(200)
-        .send(`Container modified with product_code: ${product_code}`);
+        .json(`Container modified with product_code: ${product_code}`);
     }
   );
 };
