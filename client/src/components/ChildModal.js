@@ -27,7 +27,44 @@ export default function ChildModal(props) {
   };
 
   const confirmDelete = (productCode) => {
+    // DELETE CONTAINER
     props.delData(productCode);
+
+    // GET ALL CONTAINERS
+    const getData = async () => {
+      // endpoint URL
+      const url = "http://localhost:5001/containers/all";
+      // fetch config
+      const config = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // authorization: "Bearer" + accessToken,
+        },
+        // body: JSON.stringify("content"),
+      };
+
+      // fetch
+      try {
+        const res = await fetch(url, config);
+        if (res.status !== 200) {
+          throw new Error(
+            "Something went wrong - msg from FE fetching at Containers.js"
+          );
+        }
+
+        const data = await res.json();
+        console.log("data fetched from BE: ", data);
+        reactCtx.setContainers(data);
+        // setContainers(JSON.stringify(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+
+    // reset states & close modals
     props.setOpenChild(false);
     reactCtx.setOpen(false);
   };
@@ -53,8 +90,11 @@ export default function ChildModal(props) {
             [Warning]
           </Typography>
           <div id="child-modal-description" className="flex justify-center">
-            This will delete &nbsp;{reactCtx.modalProduct.name}&nbsp;
-            permanently.
+            This will delete &nbsp;
+            <span className="font-bold uppercase">
+              {reactCtx.modalProduct.name}
+            </span>
+            &nbsp; permanently.
           </div>
           <div className="flex justify-center">Are you sure?</div>
           <br />

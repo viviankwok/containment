@@ -1,11 +1,7 @@
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ChildModalEdit from "./ChildModalEdit";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import ReactContext from "./context/react.context";
 import { TextField, InputAdornment } from "@mui/material";
 
@@ -80,9 +76,8 @@ export default function ContainerModalEdit(props) {
   const handleSave = async () => {
     console.log(`save btn clicked for #${reactCtx.modalProduct.product_code}`);
 
-    // endpoint URL
+    // UPDATE CONTAINER
     const url = `http://localhost:5001/containers/update`;
-    // fetch config
     const config = {
       method: "PATCH",
       headers: {
@@ -99,7 +94,6 @@ export default function ContainerModalEdit(props) {
       }),
     };
 
-    // fetch
     try {
       const res = await fetch(url, config);
       if (res.status !== 200) {
@@ -112,8 +106,44 @@ export default function ContainerModalEdit(props) {
       console.log(error);
     }
 
-    // close modal
+    // GET ALL CONTAINERS
+    const getData = async () => {
+      // endpoint URL
+      const url = "http://localhost:5001/containers/all";
+      // fetch config
+      const config = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // authorization: "Bearer" + accessToken,
+        },
+        // body: JSON.stringify("content"),
+      };
+
+      // fetch
+      try {
+        const res = await fetch(url, config);
+        if (res.status !== 200) {
+          throw new Error(
+            "Something went wrong - msg from FE fetching at Containers.js"
+          );
+        }
+
+        const data = await res.json();
+        console.log("data fetched from BE: ", data);
+        reactCtx.setContainers(data);
+        // setContainers(JSON.stringify(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getData();
+
+    // reset states & close modal
     reactCtx.setOpen(false);
+    reactCtx.setModalProduct("");
+    reactCtx.setIsEditing(false);
   };
 
   // discard edit confirmation
@@ -136,6 +166,8 @@ export default function ContainerModalEdit(props) {
           sx={{ width: 300, mb: 2 }}
         />
       </Typography>
+      {/* {JSON.stringify(formData)}
+      <br /> */}
 
       <div className="flex justify-center">
         <img src={reactCtx.modalProduct.img} width="300" height="300" />
