@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import ChildModal from "./ChildModal";
 import { useState, useContext } from "react";
 import ReactContext from "./context/react.context";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const style = {
   position: "absolute",
@@ -95,9 +97,11 @@ export default function ResultModal(props) {
             </div>
             <br />
             <div className="flex justify-center">
-              <Button variant="contained" onClick={props.handleClose}>
+              {/* <Button variant="contained" onClick={props.handleClose}>
                 Thank you
-              </Button>
+              </Button> */}
+              <FavoriteBorderIcon />
+              {/* <FavoriteIcon /> */}
             </div>
           </Box>
         </Fade>
