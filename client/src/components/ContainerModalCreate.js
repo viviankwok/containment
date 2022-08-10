@@ -135,7 +135,7 @@ export default function ContainerModalCreate(props) {
     // reset states & close modal
     reactCtx.setOpen(false);
     reactCtx.setModalProduct("");
-    reactCtx.setIsEditing(false);
+    reactCtx.setIsCreating(false);
   };
 
   // discard changes confirmation

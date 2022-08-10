@@ -26,9 +26,29 @@ export default function ChildModal(props) {
     props.setOpenChild(false);
   };
 
-  const confirmDelete = (productCode) => {
+  const handleConfirmDelete = async () => {
     // DELETE CONTAINER
-    props.delData(productCode);
+    const url = `http://localhost:5001/containers/delete/${reactCtx.modalProduct.product_code}`;
+    const config = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        // authorization: "Bearer" + accessToken,
+      },
+      // body: JSON.stringify("content"),
+    };
+
+    try {
+      const res = await fetch(url, config);
+      if (res.status !== 200) {
+        throw new Error("Something went wrong - unable to delete.");
+      }
+
+      const data = await res.json();
+      console.log("data fetched from BE: ", data);
+    } catch (error) {
+      console.log(error);
+    }
 
     // GET ALL CONTAINERS
     const getData = async () => {
@@ -104,9 +124,7 @@ export default function ChildModal(props) {
             &nbsp;&nbsp;&nbsp;
             <Button
               variant="contained"
-              onClick={() => {
-                confirmDelete(reactCtx.modalProduct.product_code);
-              }}
+              onClick={handleConfirmDelete}
               color="warning"
             >
               Delete permanently

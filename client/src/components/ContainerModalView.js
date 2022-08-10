@@ -7,41 +7,13 @@ import ReactContext from "./context/react.context";
 export default function ContainerModalView(props) {
   const reactCtx = useContext(ReactContext);
 
-  // delete confirmation
+  // open delete confirmation modal
   const [openChild, setOpenChild] = useState(false);
   const handleDelete = () => {
     console.log(
       `delete btn clicked for product #${reactCtx.modalProduct.product_code}`
     );
     setOpenChild(true);
-  };
-
-  // delete from db
-  const delData = async () => {
-    // endpoint URL
-    const url = `http://localhost:5001/containers/delete/${reactCtx.modalProduct.product_code}`;
-    // fetch config
-    const config = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        // authorization: "Bearer" + accessToken,
-      },
-      // body: JSON.stringify("content"),
-    };
-
-    // fetch
-    try {
-      const res = await fetch(url, config);
-      if (res.status !== 200) {
-        throw new Error("Something went wrong - unable to delete.");
-      }
-
-      const data = await res.json();
-      console.log("data fetched from BE: ", data);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   // toggle isEditing = true
@@ -93,7 +65,7 @@ export default function ContainerModalView(props) {
       <ChildModal
         openChild={openChild}
         setOpenChild={setOpenChild}
-        delData={delData}
+        // delData={delData}
       />
       {/* CHILD MODAL ENDS */}
     </div>
