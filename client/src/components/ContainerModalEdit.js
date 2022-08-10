@@ -1,23 +1,11 @@
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ChildModalEdit from "./ChildModalEdit";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import ReactContext from "./context/react.context";
 import { TextField, InputAdornment } from "@mui/material";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
-export default function ContainerModalEdit(props) {
+export default function ContainerModalEdit() {
   const reactCtx = useContext(ReactContext);
 
   const initProduct = {
@@ -35,7 +23,6 @@ export default function ContainerModalEdit(props) {
   const [openChild, setOpenChild] = useState(false);
 
   // monitor input changes => formData state
-
   const handleNameInput = (e) => {
     e.preventDefault();
     setFormData({ ...formData, name: e.target.value });
@@ -160,7 +147,7 @@ export default function ContainerModalEdit(props) {
           label="[NAME]"
           id="outlined-size-small"
           defaultValue={reactCtx.modalProduct.name}
-          // value={height}
+          value={formData.name}
           onChange={handleNameInput}
           type="text"
           sx={{ width: 300, mb: 2 }}
@@ -183,7 +170,7 @@ export default function ContainerModalEdit(props) {
             defaultValue={reactCtx.modalProduct.brand}
             size="small"
             sx={{ mb: 2, p: 0 }}
-            // value={height}
+            value={formData.brand}
             onChange={handleBrandInput}
             type="text"
           />
@@ -197,7 +184,7 @@ export default function ContainerModalEdit(props) {
             defaultValue={reactCtx.modalProduct.length}
             size="small"
             sx={{ mb: 2, width: 120 }}
-            // value={height}
+            value={formData.length}
             onChange={handleLengthInput}
             type="number"
             InputProps={{
@@ -216,7 +203,7 @@ export default function ContainerModalEdit(props) {
             defaultValue={reactCtx.modalProduct.depth}
             size="small"
             sx={{ mb: 2, width: 120 }}
-            // value={height}
+            value={formData.depth}
             onChange={handleDepthInput}
             type="number"
             InputProps={{
@@ -231,7 +218,7 @@ export default function ContainerModalEdit(props) {
             defaultValue={reactCtx.modalProduct.height}
             size="small"
             sx={{ mb: 2, width: 120 }}
-            // value={height}
+            value={formData.height}
             onChange={handleHeightInput}
             type="number"
             InputProps={{
@@ -270,9 +257,6 @@ export default function ContainerModalEdit(props) {
             // value={height}
             // onChange={handleLinkInput}
             type="text"
-            // InputProps={{
-            //   endAdornment: <InputAdornment position="end">cm</InputAdornment>,
-            // }}
           />
         </Typography>
       </div>

@@ -19,7 +19,7 @@ const style = {
   pb: 3,
 };
 
-export default function ChildModal(props) {
+export default function ChildModalEdit(props) {
   const reactCtx = useContext(ReactContext);
 
   const handleClose = () => {
@@ -33,7 +33,6 @@ export default function ChildModal(props) {
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open Child Modal</Button> */}
       <Modal
         hideBackdrop
         open={props.openChild}

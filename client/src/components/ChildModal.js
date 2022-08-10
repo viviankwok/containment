@@ -71,7 +71,6 @@ export default function ChildModal(props) {
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open Child Modal</Button> */}
       <Modal
         hideBackdrop
         open={props.openChild}
