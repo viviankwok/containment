@@ -74,7 +74,7 @@ export default function ContainerModalView(props) {
         align="center"
         sx={{ mb: 2 }}
       >
-        {reactCtx.modalProduct.name} view
+        {reactCtx.modalProduct.name}
       </Typography>
       <div className="flex justify-center">
         <img src={reactCtx.modalProduct.img} width="300" height="300" />

@@ -77,7 +77,6 @@ const Containers = () => {
         <div className="mb-1 grid justify-center">
           <div className="text-2xl font-bold">All containers.</div>
           <div className="text-xs font-light">[ EVERYTHING OUT THERE ]</div>
-          isEditing state: {JSON.stringify(isEditing)}
         </div>
         <ContainerModalRev
           open={open}

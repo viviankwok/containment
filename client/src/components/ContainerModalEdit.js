@@ -24,19 +24,62 @@ const style = {
 export default function ContainerModalEdit(props) {
   const reactCtx = useContext(ReactContext);
 
+  const initProduct = {
+    product_code: reactCtx.modalProduct.product_code,
+    name: reactCtx.modalProduct.name,
+    brand: reactCtx.modalProduct.brand,
+    length: reactCtx.modalProduct.length,
+    depth: reactCtx.modalProduct.depth,
+    height: reactCtx.modalProduct.height,
+  };
+
+  const [formData, setFormData] = useState(initProduct);
+
   // delete confirmation
   const [openChild, setOpenChild] = useState(false);
 
-  const handleSave = () => {
-    console.log(`save btn clicked for #${reactCtx.modalProduct.product_code}`);
-    reactCtx.setOpen(false);
-    console.log("fake saved");
-    updateData();
+  // monitor input changes => formData state
+
+  const handleNameInput = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, name: e.target.value });
   };
 
-  // update container info
-  const updateData = async () => {
-    console.log("updateData() activated");
+  const handleBrandInput = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, brand: e.target.value });
+  };
+
+  const handleLengthInput = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, length: e.target.value });
+  };
+
+  const handleDepthInput = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, depth: e.target.value });
+  };
+
+  const handleHeightInput = (e) => {
+    e.preventDefault();
+    setFormData({ ...formData, height: e.target.value });
+  };
+
+  // const handlePriceInput = (e) => {
+  //   e.preventDefault();
+  //   console.log("handlePriceInput activated");
+  //   setFormData({ ...formData, price: e.target.value });
+  // };
+
+  // const handleLinkInput = (e) => {
+  //   e.preventDefault();
+  //   console.log("handleLinkInput activated");
+  //   setFormData({ ...formData, link: e.target.value });
+  // };
+
+  const handleSave = async () => {
+    console.log(`save btn clicked for #${reactCtx.modalProduct.product_code}`);
+
     // endpoint URL
     const url = `http://localhost:5001/containers/update`;
     // fetch config
@@ -48,11 +91,11 @@ export default function ContainerModalEdit(props) {
       },
       body: JSON.stringify({
         product_code: reactCtx.modalProduct.product_code,
-        name: reactCtx.modalProduct.name,
-        brand: reactCtx.modalProduct.brand,
-        length: reactCtx.modalProduct.length,
-        depth: reactCtx.modalProduct.depth,
-        width: reactCtx.modalProduct.width,
+        name: formData.name,
+        brand: formData.brand,
+        length: formData.length,
+        depth: formData.depth,
+        height: formData.height,
       }),
     };
 
@@ -68,6 +111,9 @@ export default function ContainerModalEdit(props) {
     } catch (error) {
       console.log(error);
     }
+
+    // close modal
+    reactCtx.setOpen(false);
   };
 
   // discard edit confirmation
@@ -78,15 +124,19 @@ export default function ContainerModalEdit(props) {
 
   return (
     <div>
-      <Typography
-        id="transition-modal-title"
-        variant="h6"
-        component="h2"
-        align="center"
-        sx={{ mb: 2 }}
-      >
-        {reactCtx.modalProduct.name} editing
+      {/* //////////////////////////////////////////////////////////////////////// NAME */}
+      <Typography align="center">
+        <TextField
+          label="[NAME]"
+          id="outlined-size-small"
+          defaultValue={reactCtx.modalProduct.name}
+          // value={height}
+          onChange={handleNameInput}
+          type="text"
+          sx={{ width: 300, mb: 2 }}
+        />
       </Typography>
+
       <div className="flex justify-center">
         <img src={reactCtx.modalProduct.img} width="300" height="300" />
       </div>
@@ -94,6 +144,7 @@ export default function ContainerModalEdit(props) {
         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
           <Typography variant="overline">[brand]</Typography>
           &nbsp;&nbsp;
+          {/* //////////////////////////////////////////////////////////////////////// BRAND */}
           <TextField
             // label="height"
             id="outlined-size-small"
@@ -101,15 +152,13 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ mb: 2, p: 0 }}
             // value={height}
-            // onChange={handleHeightInput}
+            onChange={handleBrandInput}
             type="text"
-            // InputProps={{
-            //   endAdornment: <InputAdornment position="end">cm</InputAdornment>,
-            // }}
           />
           <br />
           <Typography variant="overline">[size]</Typography>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {/* //////////////////////////////////////////////////////////////////////// LENGTH */}
           <TextField
             label="length"
             id="outlined-size-small"
@@ -117,7 +166,7 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ mb: 2, width: 120 }}
             // value={height}
-            // onChange={handleHeightInput}
+            onChange={handleLengthInput}
             type="number"
             InputProps={{
               endAdornment: (
@@ -128,6 +177,7 @@ export default function ContainerModalEdit(props) {
             }}
           />
           &nbsp;
+          {/* //////////////////////////////////////////////////////////////////////// DEPTH */}
           <TextField
             label="depth"
             id="outlined-size-small"
@@ -135,13 +185,14 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ mb: 2, width: 120 }}
             // value={height}
-            // onChange={handleHeightInput}
+            onChange={handleDepthInput}
             type="number"
             InputProps={{
               endAdornment: <InputAdornment position="end">cm</InputAdornment>,
             }}
           />
           &nbsp;
+          {/* //////////////////////////////////////////////////////////////////////// HEIGHT */}
           <TextField
             label="height"
             id="outlined-size-small"
@@ -149,13 +200,14 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ mb: 2, width: 120 }}
             // value={height}
-            // onChange={handleHeightInput}
+            onChange={handleHeightInput}
             type="number"
             InputProps={{
               endAdornment: <InputAdornment position="end">cm</InputAdornment>,
             }}
           />
           <br />
+          {/* //////////////////////////////////////////////////////////////////////// PRICE */}
           <Typography variant="overline">[price]</Typography>
           &nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
@@ -165,7 +217,7 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ mb: 2, width: 120 }}
             // value={height}
-            // onChange={handleHeightInput}
+            // onChange={handlePriceInput}
             type="number"
             InputProps={{
               startAdornment: (
@@ -174,6 +226,7 @@ export default function ContainerModalEdit(props) {
             }}
           />
           <br />
+          {/* //////////////////////////////////////////////////////////////////////// LINK */}
           <Typography variant="overline">[link]</Typography>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
@@ -183,7 +236,7 @@ export default function ContainerModalEdit(props) {
             size="small"
             sx={{ p: 0 }}
             // value={height}
-            // onChange={handleHeightInput}
+            // onChange={handleLinkInput}
             type="text"
             // InputProps={{
             //   endAdornment: <InputAdornment position="end">cm</InputAdornment>,
@@ -193,6 +246,7 @@ export default function ContainerModalEdit(props) {
       </div>
       <br />
       <div className="flex justify-center">
+        {/* //////////////////////////////////////////////////////////////////////// BUTTONS */}
         <Button variant="contained" onClick={handleEditBack}>
           Back
         </Button>

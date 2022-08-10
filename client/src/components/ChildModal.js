@@ -10,7 +10,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 350,
+  width: 600,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -53,10 +53,7 @@ export default function ChildModal(props) {
             [Warning]
           </Typography>
           <div id="child-modal-description" className="flex justify-center">
-            This will delete
-            <span className="font-bold uppercase">
-              &nbsp;{reactCtx.modalProduct.name}&nbsp;
-            </span>
+            This will delete &nbsp;{reactCtx.modalProduct.name}&nbsp;
             permanently.
           </div>
           <div className="flex justify-center">Are you sure?</div>
