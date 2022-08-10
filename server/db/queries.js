@@ -40,21 +40,21 @@ const getContainers = async (req, res) => {
 const createContainer = async (req, res) => {
   console.log('POST "/containers/create" activated');
 
-  const { product_code, brand, length, width, height } = req.body;
+  const { product_code, name, brand, length, depth, height } = req.body;
 
   pool.query(
-    "INSERT INTO containers (product_code, brand, length, width, height) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-    [product_code, brand, length, width, height],
+    "INSERT INTO containers (product_code, name, brand, length, depth, height) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+    [product_code, name, brand, length, depth, height],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
         console.log(error);
       }
-      // console.log("this is results: ", results);
+      console.log("this is results: ", results);
       res
         .status(201)
         .send(
-          `Container added with model number: ${results.rows[0].product_code}`
+          `Container added with product_code: ${results.rows[0].product_code}`
         );
     }
   );
@@ -62,16 +62,15 @@ const createContainer = async (req, res) => {
 
 // UPDATE CONTAINER
 const updateContainer = async (req, res) => {
-  const product_code = req.params.product_code;
-
-  console.log(`PATCH "/containers/update/${product_code}" activated`);
+  console.log(`PATCH "/containers/update" activated`);
 
   // product_code cannot be redefined/updated
-  const { brand, length, width, height } = req.body;
+  // product_code not required in body; passed through params
+  const { product_code, brand, name, length, depth, height } = req.body;
 
   pool.query(
-    "UPDATE containers SET brand = $2, length = $3, width = $4, height = $5 WHERE product_code = $1",
-    [product_code, brand, length, width, height],
+    "UPDATE containers SET name = $2, brand = $3, length = $4, depth = $5, height = $6 WHERE product_code = $1",
+    [product_code, name, brand, length, depth, height],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
