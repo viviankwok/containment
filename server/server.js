@@ -33,6 +33,8 @@ app.use("/spaces", spacesController);
 // endpoint
 const db = require("./db/queries");
 app.post("/calculate", db.calcContainers);
+app.put("/user/register", db.registerUser);
+app.post("/user/login", db.logIn);
 
 // listen to PORT
 const PORT = process.env.PORT || 5001;
