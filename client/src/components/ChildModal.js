@@ -109,11 +109,11 @@ export default function ChildModal(props) {
             [Warning]
           </Typography>
           <div id="child-modal-description" className="flex justify-center">
-            This will delete &nbsp;
+            This will delete&nbsp;
             <span className="font-bold uppercase">
               {reactCtx.modalProduct.name}
             </span>
-            &nbsp; permanently.
+            &nbsp;permanently.
           </div>
           <div className="flex justify-center">Are you sure?</div>
           <br />

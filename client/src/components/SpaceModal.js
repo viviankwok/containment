@@ -105,7 +105,7 @@ export default function SpaceModal(props) {
             </div>
             <br />
             <div className="flex justify-center">
-              <Button variant="contained">Edit</Button>&nbsp;&nbsp;&nbsp;
+              {/* <Button variant="contained">Edit</Button>&nbsp;&nbsp;&nbsp; */}
               <Button variant="contained" onClick={handleDelete}>
                 Delete
               </Button>

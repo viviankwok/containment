@@ -32,6 +32,7 @@ export default function ContainerModalView(props) {
       >
         {reactCtx.modalProduct.name}
       </Typography>
+      {/* modal product state: {JSON.stringify(reactCtx.modalProduct)} */}
       <div className="flex justify-center">
         <img src={reactCtx.modalProduct.img} width="300" height="300" />
       </div>
@@ -46,9 +47,10 @@ export default function ContainerModalView(props) {
           {reactCtx.modalProduct.depth} (D) ×&nbsp;
           {reactCtx.modalProduct.height} (H) cm
           <br />
-          <Typography variant="overline">[price]</Typography> $x
+          <Typography variant="overline">[price]</Typography> $
+          {reactCtx.modalProduct.price}
           <br />
-          <Typography variant="overline">[link]</Typography> xxx.com
+          {/* <Typography variant="overline">[link]</Typography> xxx.com */}
         </Typography>
       </div>
       <br />

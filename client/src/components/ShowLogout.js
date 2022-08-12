@@ -11,10 +11,6 @@ const ShowLogout = () => {
 
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleChange = (event) => {
-    reactCtx.setAuth(event.target.checked);
-  };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,6 +25,8 @@ const ShowLogout = () => {
   };
   return (
     <div>
+      Welcome,
+      <span className="font-bold"> {reactCtx.values.email}</span>
       <IconButton
         size="large"
         aria-label="account of current user"
@@ -38,7 +36,7 @@ const ShowLogout = () => {
         color="inherit"
       >
         <AccountCircle />
-      </IconButton>
+      </IconButton>{" "}
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

@@ -25,13 +25,8 @@ export default function TopAppBar(props) {
           >
             <div className="font-black">containment.</div>
           </Typography>
-          {/* <Typography
-            variant="overline"
-            sx={{ fontWeight: "bold", fontSize: 13 }}
-          >
-            Logout
-          </Typography> */}
-          auth state here: {JSON.stringify(reactCtx.auth)}
+
+          {/* auth state here: {JSON.stringify(reactCtx.auth)} */}
           {reactCtx.auth ? <ShowLogout /> : ""}
         </Toolbar>
       </AppBar>

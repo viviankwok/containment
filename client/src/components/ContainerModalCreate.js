@@ -15,9 +15,10 @@ export default function ContainerModalCreate(props) {
     length: reactCtx.modalProduct.length,
     depth: reactCtx.modalProduct.depth,
     height: reactCtx.modalProduct.height,
+    price: reactCtx.modalProduct.price,
   };
 
-  const [formData, setFormData] = useState(initProduct);
+  const [formData, setFormData] = useState("");
 
   // delete confirmation
   const [openChild, setOpenChild] = useState(false);
@@ -53,17 +54,11 @@ export default function ContainerModalCreate(props) {
     setFormData({ ...formData, height: e.target.value });
   };
 
-  // const handlePriceInput = (e) => {
-  //   e.preventDefault();
-  //   console.log("handlePriceInput activated");
-  //   setFormData({ ...formData, price: e.target.value });
-  // };
-
-  // const handleLinkInput = (e) => {
-  //   e.preventDefault();
-  //   console.log("handleLinkInput activated");
-  //   setFormData({ ...formData, link: e.target.value });
-  // };
+  const handlePriceInput = (e) => {
+    e.preventDefault();
+    console.log("handlePriceInput activated");
+    setFormData({ ...formData, price: e.target.value });
+  };
 
   const handleSave = async () => {
     console.log(`save btn clicked for #${reactCtx.modalProduct.product_code}`);
@@ -83,6 +78,7 @@ export default function ContainerModalCreate(props) {
         length: formData.length,
         depth: formData.depth,
         height: formData.height,
+        price: formData.price,
       }),
     };
 
@@ -255,8 +251,8 @@ export default function ContainerModalCreate(props) {
             defaultValue={reactCtx.modalProduct.price}
             size="small"
             sx={{ mb: 2, width: 120 }}
-            // value={height}
-            // onChange={handlePriceInput}
+            value={formData.price}
+            onChange={handlePriceInput}
             type="number"
             InputProps={{
               startAdornment: (
@@ -264,9 +260,9 @@ export default function ContainerModalCreate(props) {
               ),
             }}
           />
-          <br />
+          {/* <br /> */}
           {/* //////////////////////////////////////////////////////////////////////// LINK */}
-          <Typography variant="overline">[link]</Typography>
+          {/* <Typography variant="overline">[link]</Typography>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <TextField
             // label="height"
@@ -277,7 +273,7 @@ export default function ContainerModalCreate(props) {
             // value={height}
             // onChange={handleLinkInput}
             type="text"
-          />
+          /> */}
         </Typography>
       </div>
       <br />

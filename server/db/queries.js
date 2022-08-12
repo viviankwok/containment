@@ -34,12 +34,12 @@ const getContainers = async (req, res) => {
 const createContainer = async (req, res) => {
   console.log('POST "/containers/create" activated');
 
-  const { product_code, name, brand, length, depth, height } = req.body;
+  const { product_code, name, brand, length, depth, height, price } = req.body;
   console.log(req.body);
 
   pool.query(
-    "INSERT INTO containers (product_code, name, brand, length, depth, height) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [product_code, name, brand, length, depth, height],
+    "INSERT INTO containers (product_code, name, brand, length, depth, height, price) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+    [product_code, name, brand, length, depth, height, price],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");
@@ -61,12 +61,12 @@ const updateContainer = async (req, res) => {
 
   // product_code cannot be redefined/updated
   // product_code not required in body; passed through params
-  const { product_code, brand, name, length, depth, height } = req.body;
+  const { product_code, brand, name, length, depth, height, price } = req.body;
   console.log("req.body here:", req.body);
 
   pool.query(
-    "UPDATE containers SET name = $2, brand = $3, length = $4, depth = $5, height = $6 WHERE product_code = $1",
-    [product_code, name, brand, length, depth, height],
+    "UPDATE containers SET name = $2, brand = $3, length = $4, depth = $5, height = $6, price = $7 WHERE product_code = $1",
+    [product_code, name, brand, length, depth, height, price],
     (error, results) => {
       if (error) {
         res.json("Something went wrong.");

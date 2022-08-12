@@ -28,8 +28,13 @@ const App = () => {
     },
   });
 
-  // monitor auth
-  const [auth, setAuth] = useState(true);
+  // monitor auth & user info
+  const [auth, setAuth] = useState(false);
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+    showPassword: false,
+  });
 
   // handle nav
   const [view, setView] = useState("home");
@@ -44,6 +49,8 @@ const App = () => {
         value={{
           auth,
           setAuth,
+          values,
+          setValues,
         }}
       >
         <ThemeProvider theme={theme}>
